@@ -51,16 +51,25 @@ const titleClickHandler = function(event){
 
     /* for each article */
 
-    /* get the article id */
+    const articles = document.querySelectorAll(optArticleSelector);
+    console.log('articles', articles);
 
-    /* find the title element */
+    for(let article of articles){
 
-    /* get the title from the title element */
+      /* get the article id */
 
-    /* create HTML of the link */
+      const articleId = article.getAttribute('id');
+      console.log('article id', articleId);
+
+      /* find the title element and get the title from the title element */
+
+      const articleTitle = article.querySelector(optTitleSelector).innerHTML;
+      console.log(' title of element', articleTitle);
+
+      /* create HTML of the link */
 
     /* insert link into titleList */
-
+    }
   }
 
   generateTitleLinks();
