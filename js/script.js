@@ -50,7 +50,8 @@ const titleClickHandler = function(event){
 
 const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
-  optTitleListSelector = '.titles';
+  optTitleListSelector = '.titles',
+  optArticleTagsSelector = '.post-tags .list';
 
 function generateTitleLinks(){
 
@@ -106,27 +107,56 @@ generateTitleLinks();
 function generateTags(){
   /* find all articles */
 
+  const articles = document.querySelectorAll(optArticleSelector);
+  console.log('all articles', articles);
+
   /* START LOOP: for every article: */
 
-  /* find tags wrapper */
+  for(let article of articles){
 
-  /* make html variable with empty string */
+    /* find tags wrapper */
 
-  /* get tags from data-tags attribute */
+    const tagsWrapper = article.querySelector(optArticleTagsSelector);
+    console.log('tags wrapper', tagsWrapper);
 
-  /* split tags into array */
+    /* make html variable with empty string */
 
-  /* START LOOP: for each tag */
+    let html = '';
 
-  /* generate HTML of the link */
+    /* get tags from data-tags attribute */
 
-  /* add generated code to html variable */
+    const articleTags = article.getAttribute('data-tags');
+    console.log('data tags', articleTags);
 
-  /* END LOOP: for each tag */
+    /* split tags into array */
 
-  /* insert HTML of all the links into the tags wrapper */
+    const articleTagsArray = articleTags.split(' ');
+
+    console.log('splitted data tags', articleTagsArray);
+
+    /* START LOOP: for each tag */
+
+    for(let tag of articleTagsArray){
+      console.log('article tag', tag);
+
+      /* generate HTML of the link */
+
+      const linkHTML = '<li><a href="#' + tag + '">' + tag + '</a></li>';  // '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+      console.log('html tag',linkHTML);
+      /* add generated code to html variable */
+
+      html = html + linkHTML;
+
+    /* END LOOP: for each tag */
+    }
+
+    /* insert HTML of all the links into the tags wrapper */
+
+    tagsWrapper.insertAdjacentHTML('afterbegin',html);
+
 
   /* END LOOP: for every article: */
+  }
 }
 
 generateTags();
