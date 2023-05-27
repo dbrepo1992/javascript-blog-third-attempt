@@ -53,7 +53,7 @@ const optArticleSelector = '.post',
   optTitleListSelector = '.titles',
   optArticleTagsSelector = '.post-tags .list';
 
-function generateTitleLinks(){
+  function generateTitleLinks(customSelector = ''){
 
   /* remove contents of titleList */
 
@@ -224,7 +224,7 @@ function addClickListenersToTags(){
 
   /* add tagClickHandler as event listener for that link */
 
-  
+
 
   /* END LOOP: for each link */
 }
