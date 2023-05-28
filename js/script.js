@@ -51,7 +51,8 @@ const titleClickHandler = function(event){
 const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles',
-  optArticleTagsSelector = '.post-tags .list';
+  optArticleTagsSelector = '.post-tags .list',
+  optArticleAuthorSelector = '.post .post-author';
 
 function generateTitleLinks(customSelector = ''){
 
@@ -61,10 +62,11 @@ function generateTitleLinks(customSelector = ''){
 
   titleList.innerHTML = '';
 
-  let html = '';
   /* for each article */
 
   const articles = document.querySelectorAll(optArticleSelector + customSelector);
+
+  let html = '';
 
   for(let article of articles){
 
@@ -98,10 +100,10 @@ function generateTitleLinks(customSelector = ''){
     link.addEventListener('click', titleClickHandler);
   }
   console.log('links',links);
-
 }
 
 generateTitleLinks();
+
 
 
 function generateTags(){
@@ -217,16 +219,61 @@ function tagClickHandler(event){
 
 }
 
+
 function addClickListenersToTags(){
   /* find all links to tags */
 
+  const linksToTags = document.querySelectorAll('a.active[href^="#tag-"]');
+
   /* START LOOP: for each link */
 
-  /* add tagClickHandler as event listener for that link */
+  for(let link of linksToTags){
 
+    /* add tagClickHandler as event listener for that link */
 
+    link.addEventListener('click', tagClickHandler);
 
   /* END LOOP: for each link */
+  }
 }
 
 addClickListenersToTags();
+
+
+function generateAuthors(){
+  /* find all articles */
+
+  const articles = document.querySelectorAll(optArticleSelector);
+
+  /* START LOOP: for every articles: */
+
+  for(let article of articles){
+
+    /* find author wrapper */
+
+    const authorWrapper = document.querySelectorAll(optArticleAuthorSelector);
+
+    /* make html variable with empty string */
+
+    /* get tags from data-author attribute */
+
+    /* generate HTML of the link */
+
+    /* add generated code to html variable */
+
+    /* insert HTML of all the links into the authors wrapper */
+
+  /* END LOOP: for every article: */
+  }
+}
+generateAuthors();
+
+function addClickListenersToAuthors(){
+
+}
+addClickListenersToAuthors();
+
+function authorClickHandler(){
+
+}
+
