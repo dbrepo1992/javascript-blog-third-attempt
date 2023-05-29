@@ -21,7 +21,7 @@ const titleClickHandler = function(event){
 
   /* [DONE] remove class 'active' from all articles */
 
-  const activeArticles = document.querySelectorAll('article');
+  const activeArticles = document.querySelectorAll('section article');
 
   for(let activeArticle of activeArticles){
     activeArticle.classList.remove('active');
@@ -87,11 +87,13 @@ function generateTitleLinks(customSelector = ''){
     const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
     console.log('link html', linkHTML);
 
-    /* insert link into titleList */
+    /* insert link into html variable */
 
     html = html + linkHTML;
 
   }
+  /* insert link into titleList */
+
   titleList.insertAdjacentHTML('afterbegin',html);
 
   const links = document.querySelectorAll('.titles a');
@@ -118,7 +120,7 @@ function generateTags(){
 
     /* find tags wrapper */
 
-    const tagsWrapper = article.querySelector(optArticleTagsSelector);
+    const tagsWrapper = article.querySelectorAll(optArticleTagsSelector);
     console.log('tags wrapper', tagsWrapper);
 
     /* make html variable with empty string */
@@ -143,7 +145,8 @@ function generateTags(){
 
       /* generate HTML of the link */
 
-      const linkHTML = '<li><a href="#' + tag + '">' + tag + '</a></li>';  // '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+      const linkHTML = '<li><a href="#tag-' + tag +'">' + tag + '</a></li>';
+
       console.log('html tag',linkHTML);
       /* add generated code to html variable */
 
@@ -154,9 +157,10 @@ function generateTags(){
 
     /* insert HTML of all the links into the tags wrapper */
 
-    tagsWrapper.insertAdjacentHTML('afterbegin',html);
-
-
+    for(let tagWrapper of tagsWrapper){
+      tagWrapper.insertAdjacentHTML('afterbegin', html);
+      console.log('generate links of tag', tagWrapper);
+    }
   /* END LOOP: for every article: */
   }
 }
@@ -172,6 +176,7 @@ function tagClickHandler(event){
   /* make new constant named "clickedElement" and give it the value of "this" */
 
   const clickedElement = this;
+  console.log('clicked element', clickedElement);
 
   /* make a new constant "href" and read the attribute "href" of the clicked element */
 
@@ -223,7 +228,7 @@ function tagClickHandler(event){
 function addClickListenersToTags(){
   /* find all links to tags */
 
-  const linksToTags = document.querySelectorAll('a.active[href^="#tag-"]');
+  const linksToTags = document.querySelectorAll('a[href^="#tag-"]');
 
   /* START LOOP: for each link */
 
@@ -251,7 +256,7 @@ function generateAuthors(){
 
     /* find author wrapper */
 
-    const authorWrapper = article.querySelectorAll(optArticleAuthorSelector);
+    const authorsWrapper = article.querySelectorAll(optArticleAuthorSelector);
 
     /* make html variable with empty string */
 
@@ -271,7 +276,7 @@ function generateAuthors(){
 
     /* insert HTML of all the links into the authors wrapper */
 
-    for(let author of authorWrapper){
+    for(let author of authorsWrapper){
       author.insertAdjacentHTML('afterbegin', html);
     }
 
@@ -347,7 +352,7 @@ function addClickListenersToAuthors(){
 
     /* add tagClickHandler as event listener for that link */
 
-    linkToAuthor,addEventListener('click', authorClickHandler);
+    linkToAuthor.addEventListener('click', authorClickHandler);
 
   /* END LOOP: for each link */
   }
