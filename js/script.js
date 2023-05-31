@@ -162,22 +162,23 @@ function generateTags(){
         /* [NEW] add generated code to allTags array */
         allTags.push(linkHTML);
 
-    /* END LOOP: for each tag */
+        /* END LOOP: for each tag */
+      }
+
+      /* insert HTML of all the links into the tags wrapper */
+
+      for(let tagWrapper of tagsWrapper){
+        tagWrapper.insertAdjacentHTML('afterbegin', html);
+        console.log('generate links of tag', tagWrapper);
+      }
+      /* END LOOP: for every article: */
+
+      /* [NEW] find list of tags in right column */
+      const tagList = document.querySelector(optTagsListSelector);
+
+      /* [NEW] add html from allTags to tagList */
+      tagList.innerHTML = allTags.join(' ');
     }
-
-    /* insert HTML of all the links into the tags wrapper */
-
-    for(let tagWrapper of tagsWrapper){
-      tagWrapper.insertAdjacentHTML('afterbegin', html);
-      console.log('generate links of tag', tagWrapper);
-    }
-  /* END LOOP: for every article: */
-
-  /* [NEW] find list of tags in right column */
-  const tagList = document.querySelector(optTagsListSelector);
-
-  /* [NEW] add html from allTags to tagList */
-  tagList.innerHTML = allTags.join(' ');
   }
 }
 
