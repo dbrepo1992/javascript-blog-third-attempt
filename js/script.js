@@ -53,7 +53,7 @@ const optArticleSelector = '.post',
   optTitleListSelector = '.titles',
   optArticleTagsSelector = '.post-tags .list',
   optArticleAuthorSelector = '.post .post-author',
-  optTagsListSelector = '.tags .list.';
+  optTagsListSelector = '.tags .list';
 
 function generateTitleLinks(customSelector = ''){
 
@@ -111,8 +111,8 @@ generateTitleLinks();
 
 function generateTags(){
 
-  /* [NEW] create a new variable allTags with an empty array */
-  let allTags = [];
+  /* [NEW] create a new variable allTags with an empty object */
+  let allTags = {};
 
   /* find all articles */
 
@@ -158,9 +158,11 @@ function generateTags(){
       html = html + linkHTML;
 
       /* [NEW] check if this link is NOT already in allTags */
-      if(allTags.indexOf(linkHTML) == -1){
-        /* [NEW] add generated code to allTags array */
-        allTags.push(linkHTML);
+      if(!allTags[tag]) {
+        /* [NEW] add tag to allTags object */
+        allTags[tag] = 1;
+      } else {
+        allTags[tag]++;
 
         /* END LOOP: for each tag */
       }
@@ -175,9 +177,11 @@ function generateTags(){
 
       /* [NEW] find list of tags in right column */
       const tagList = document.querySelector(optTagsListSelector);
+      console.log(tagList);
 
       /* [NEW] add html from allTags to tagList */
-      tagList.innerHTML = allTags.join(' ');
+      // tagList.innerHTML = allTags.join(' ');
+      console.log('allTags', allTags);
     }
   }
 }
