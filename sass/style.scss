@@ -140,14 +140,21 @@ a:hover {
   transition: ease-in-out, 0.2s;
 }
 
+.sidebar .tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
 .tag-size-5{
   color: gold;
-  font-size: 5vh;
+  font-size: 6vh;
 }
 
 .tag-size-4{
   color: rgb(0, 255, 128);
-  font-size: 4vh;
+  font-size: 4.5vh;
 }
 
 .tag-size-3{
