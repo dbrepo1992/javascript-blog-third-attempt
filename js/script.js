@@ -136,16 +136,18 @@ function calculateTagsParams(tags){
 calculateTagsParams();
 
 
-function calculateTagClass(count, params){
+function calculateTagClass(optCloudClassCount, params){
 
   params = {max : 0, min : 999999};
 
-  const classNumber = Math.floor( ( (count - params.min) / (params.max - params.min) ) * optCloudClassCount + 1 );
+  const classNumber = Math.floor( ( (optCloudClassCount - params.min) / (params.max - params.min) ) * optCloudClassCount + 1 );
+  console.log('class number', classNumber);
 
   return [optCloudClassPrefix + classNumber];
 
 }
 calculateTagClass();
+
 
 
 
@@ -234,6 +236,7 @@ function generateTags(){
 
     const tagLinkHTML = '<li><a class=' + '"' + calculateTagClass(allTags[tag], tagsParams) + '"' + 'href="#tag-' +  tag + '">' + ' (' + allTags[tag] + ') ' + tag + '</a></li>';
     console.log('tagLinkHTML:', tagLinkHTML);
+
 
 
     allTagsHTML += tagLinkHTML;
