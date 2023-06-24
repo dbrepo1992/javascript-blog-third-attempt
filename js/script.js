@@ -332,11 +332,46 @@ function addClickListenersToTags(){
 
 addClickListenersToTags();
 
+function calculateAuthorsParams(authors){
 
+  const params = {max : 0, min : 999999};
+
+
+
+  for(let author in authors){
+    console.log(author + ' is used ' + authors[author] + ' times');
+    if(authors[author] > params.max){
+      params.max = authors[author];
+    }
+
+    if(authors[author] < params.min){
+      params.min = authors[author];
+    }
+  }
+  return params;
+}
+calculateAuthorsParams();
+
+
+function calculateAuthorClass(optCloudClassCount, params){
+
+  params = {max : 0, min : 999999};
+
+  const classNumber = Math.floor( ( (optCloudClassCount - params.min) / (params.max - params.min) ) * optCloudClassCount + 1 );
+  console.log('class number', classNumber);
+
+  return [optCloudClassPrefix + classNumber];
+
+}
+calculateAuthorClass();
 
 
 function generateAuthors(){
-/* find all articles */
+
+  /* [NEW] create a new variable allAuthors with an empty object */
+  let allAuthors = {};
+
+  /* find all articles */
 
   const articles = document.querySelectorAll(optArticleSelector);
 
@@ -344,7 +379,7 @@ function generateAuthors(){
 
   for(let article of articles){
     console.log(article);
-    /* find tags wrapper */
+    /* find authors wrapper */
 
     const authorsWrapper = article.querySelectorAll(optArticleAuthorSelector);
     console.log('authors', authorsWrapper);
@@ -355,13 +390,15 @@ function generateAuthors(){
 
     /* get authors from data-author attribute */
 
-    const articleAuthors = article.getAttribute('data-author');
+    const author = article.getAttribute('data-author');
 
-    console.log('articleAuthors', articleAuthors);
+    console.log('articleAuthors', author);
+
+
 
     /* generate HTML of the link */
 
-    const linkHTML = '<li><a href="#author-' + articleAuthors +'">' + articleAuthors + '</a></li>';
+    const linkHTML = '<li><a href="#author-' + author +'">' + author + '</a></li>';
     console.log('linkhtml' , linkHTML);
 
     /* add generated code to html variable */
@@ -369,12 +406,45 @@ function generateAuthors(){
     html = html + linkHTML;
     console.log('html', html);
 
+
+    /* [NEW] check if this link is NOT already in allAuthors */
+    if(!allAuthors[author]) {
+      /* [NEW] add tag to allAuthors object */
+      allAuthors[author] = 1;
+    }else {
+      allAuthors[author]++;
+    }
+
     /* insert HTML of all the links into the authors wrapper */
 
     for(let authorWrapper of authorsWrapper){
       authorWrapper.insertAdjacentHTML('afterbegin', html);
       console.log('generate links of author', authorWrapper);
     }
+
+    /* [NEW] find list of authors in right column */
+    const authorList = document.querySelector(optAuthorsListSelector);
+
+    const authorsParams = calculateAuthorsParams(allAuthors);
+    console.log('authorsParams:', authorsParams);
+
+    /* [NEW] create variable for all links HTML code */
+    let allAuthorsHTML = '';
+
+    /* [NEW] START LOOP: for each author in allAuthors: */
+    for(let author in allAuthors){
+      /* [NEW] generate code of a link and add it to allAuthorsHTML */
+
+      const authorLinkHTML = '<li><a class=' + '"' + calculateAuthorClass(allAuthors[author], authorsParams) + '"' + 'href="#author-' +  author + '">' + author + '</a></li>';
+      console.log('authorLinkHTML:', authorLinkHTML);
+
+      console.log('cloud class count', optCloudClassCount);
+
+      allAuthorsHTML += authorLinkHTML;
+    }
+
+    /*[NEW] add HTML from allTagsHTML to tagList */
+    authorList.innerHTML = allAuthorsHTML;
   }
 }
 generateAuthors();
