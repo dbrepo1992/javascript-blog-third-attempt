@@ -147,6 +147,13 @@ a:hover {
   gap: 6px;
 }
 
+.sidebar .authors {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
 .tag-size-5{
   color: gold;
   font-size: 6vh;
