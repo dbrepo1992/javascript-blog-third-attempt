@@ -7,11 +7,11 @@ const opts = {
   ArticleTagsSelector : '.post-tags .list',
   ArticleAuthorSelector : '.post .post-author',
   TagsListSelector : '.list.tags',
-  CloudClassCount : '5',
   CloudClassPrefix : 'tag-size-',
   AuthorsListSelector : '.list.authors',
 };
 
+const CloudClassCount = '5';
 
 
 const titleClickHandler = function(event){
@@ -143,11 +143,11 @@ function calculateTagsParams(tags){
 calculateTagsParams();
 
 
-function calculateTagClass(opts.CloudClassCount, params){
+function calculateTagClass(CloudClassCount, params){
 
   params = {max : 0, min : 999999};
 
-  const classNumber = Math.floor( ( (opts.CloudClassCount - params.min) / (params.max - params.min) ) * opts.CloudClassCount + 1 );
+  const classNumber = Math.floor( ( (CloudClassCount - params.min) / (params.max - params.min) ) * CloudClassCount + 1 );
   console.log('class number', classNumber);
 
   return [opts.CloudClassPrefix + classNumber];
@@ -244,7 +244,7 @@ function generateTags(){
     const tagLinkHTML = '<li><a class=' + '"' + calculateTagClass(allTags[tag], tagsParams) + '"' + 'href="#tag-' +  tag + '">' + tag + '</a></li>';
     console.log('tagLinkHTML:', tagLinkHTML);
 
-    console.log('cloud class count', opts.CloudClassCount);
+    console.log('cloud class count', CloudClassCount);
 
     allTagsHTML += tagLinkHTML;
 
@@ -359,11 +359,11 @@ function calculateAuthorsParams(authors){
 calculateAuthorsParams();
 
 
-function calculateAuthorClass(opts.CloudClassCount, params){
+function calculateAuthorClass(CloudClassCount, params){
 
   params = {max : 0, min : 999999};
 
-  const classNumber = Math.floor( ( (opts.CloudClassCount - params.min) / (params.max - params.min) ) * opts.CloudClassCount + 1 );
+  const classNumber = Math.floor( ( (CloudClassCount - params.min) / (params.max - params.min) ) * CloudClassCount + 1 );
   console.log('class number', classNumber);
 
   return [opts.CloudClassPrefix + classNumber];
@@ -444,7 +444,7 @@ function generateAuthors(){
       const authorLinkHTML = '<li><a class=' + '"' + calculateAuthorClass(allAuthors[author], authorsParams) + '"' + 'href="#author-' +  author + '">' + author + '</a></li>';
       console.log('authorLinkHTML:', authorLinkHTML);
 
-      console.log('cloud class count', opts.CloudClassCount);
+      console.log('cloud class count', CloudClassCount);
 
       allAuthorsHTML += authorLinkHTML;
     }
