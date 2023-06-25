@@ -20,6 +20,10 @@ const opts = {
     count: 5,
     classPrefix: 'tag-size-',
   },
+  authorSizes: {
+    count: 5,
+    classPrefix: 'author-size-',
+  },
 };
 
 const select = {
@@ -397,7 +401,7 @@ function calculateAuthorClass(CloudClassCount, params){
   const classNumber = Math.floor( ( (CloudClassCount - params.min) / (params.max - params.min) ) * CloudClassCount + 1 );
   console.log('class number', classNumber);
 
-  return [opts.CloudClassPrefix + classNumber];
+  return [opts.authorSizes.classPrefix + classNumber];
 
 }
 calculateAuthorClass();
