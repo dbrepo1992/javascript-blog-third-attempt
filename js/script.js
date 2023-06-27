@@ -1,17 +1,9 @@
 'use strict';
 
-/*
-const opts = {
-  articleSelector: '.post',
-  titleSelector: '.post-title',
-  titleListSelector: '.titles',
-  ArticleTagsSelector : '.post-tags .list',
-  ArticleAuthorSelector : '.post .post-author',
-  TagsListSelector : '.list.tags',
-  CloudClassPrefix : 'tag-size-',
-  AuthorsListSelector : '.list.authors',
-};
-*/
+const templates = {
+  articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML)
+}
+
 const CloudClassCount = '5';
 
 
