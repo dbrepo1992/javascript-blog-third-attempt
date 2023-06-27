@@ -1,7 +1,9 @@
 'use strict';
 
 const templates = {
-  articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML)
+  articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
+  tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML),
+  authorLink: Handlebars.compile(document.querySelector('#template-author-link').innerHTML)
 }
 
 const CloudClassCount = '5';
@@ -123,7 +125,9 @@ function generateTitleLinks(customSelector = ''){
 
     /* [DONE] create HTML of the link */
 
-    const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+    const linkHTMLData = {id: articleId, title: articleTitle};
+const linkHTML = templates.articleLink(linkHTMLData);
+
 
     console.log('link was clicked', linkHTML);
 
@@ -227,8 +231,11 @@ function generateTags(){
       console.log('tag', tag);
       /* generate HTML of the link */
 
-      const linkHTML = '<li><a href="#tag-' + tag +'">' + tag + '</a></li>';
-      console.log('linkhtml' , linkHTML);
+      const linkHTMLData = {id: tag, title: tag};
+const linkHTML = templates.tagLink(linkHTMLData);
+
+    //  const linkHTML = '<li><a href="#tag-' + tag +'">' + tag + '</a></li>';
+     // console.log('linkhtml' , linkHTML);
 
       /* add generated code to html variable */
 
@@ -431,8 +438,12 @@ function generateAuthors(){
 
     /* generate HTML of the link */
 
-    const linkHTML = '<li><a href="#author-' + author +'">' + author + '</a></li>';
-    console.log('linkhtml' , linkHTML);
+    const linkHTMLData = {id: author, title: author};
+const linkHTML = templates.authorLink(linkHTMLData);
+
+
+   // const linkHTML = '<li><a href="#author-' + author +'">' + author + '</a></li>';
+   // console.log('linkhtml' , linkHTML);
 
     /* add generated code to html variable */
 
