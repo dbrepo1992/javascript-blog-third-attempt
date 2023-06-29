@@ -5,7 +5,7 @@ const templates = {
   tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML),
   authorLink: Handlebars.compile(document.querySelector('#template-author-link').innerHTML),
   tagCloudLink: Handlebars.compile(document.querySelector('#template-tag-cloud-link').innerHTML)
-}
+};
 
 const CloudClassCount = '5';
 
@@ -127,7 +127,7 @@ function generateTitleLinks(customSelector = ''){
     /* [DONE] create HTML of the link */
 
     const linkHTMLData = {id: articleId, title: articleTitle};
-const linkHTML = templates.articleLink(linkHTMLData);
+    const linkHTML = templates.articleLink(linkHTMLData);
 
 
     console.log('link was clicked', linkHTML);
@@ -233,10 +233,10 @@ function generateTags(){
       /* generate HTML of the link */
 
       const linkHTMLData = {id: tag, title: tag};
-const linkHTML = templates.tagLink(linkHTMLData);
+      const linkHTML = templates.tagLink(linkHTMLData);
 
-    //  const linkHTML = '<li><a href="#tag-' + tag +'">' + tag + '</a></li>';
-     // console.log('linkhtml' , linkHTML);
+      //  const linkHTML = '<li><a href="#tag-' + tag +'">' + tag + '</a></li>';
+      // console.log('linkhtml' , linkHTML);
 
       /* add generated code to html variable */
 
@@ -283,10 +283,10 @@ const linkHTML = templates.tagLink(linkHTMLData);
     console.log('cloud class count', CloudClassCount);
 
     allTagsData.tags.push({
-  tag: tag,
-  count: allTags[tag],
-  className: calculateTagClass(allTags[tag], tagsParams)
-});
+      tag: tag,
+      count: allTags[tag],
+      className: calculateTagClass(allTags[tag], tagsParams)
+    });
 
 
   }
@@ -447,11 +447,11 @@ function generateAuthors(){
     /* generate HTML of the link */
 
     const linkHTMLData = {id: author, title: author};
-const linkHTML = templates.authorLink(linkHTMLData);
+    const linkHTML = templates.authorLink(linkHTMLData);
 
 
-   // const linkHTML = '<li><a href="#author-' + author +'">' + author + '</a></li>';
-   // console.log('linkhtml' , linkHTML);
+    // const linkHTML = '<li><a href="#author-' + author +'">' + author + '</a></li>';
+    // console.log('linkhtml' , linkHTML);
 
     /* add generated code to html variable */
 
